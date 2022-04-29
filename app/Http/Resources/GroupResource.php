@@ -18,7 +18,7 @@ class GroupResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'plan' => $this->plan()->exists() ? $this->plan->only(['id', 'title']) : null,
+//            'plan' => $this->plan()->exists() ? $this->plan->only(['id', 'title']) : null,
             'students' => $this->students->map(function ($student) {
                 return $student->only(['id', 'name', 'email']);
             }),
