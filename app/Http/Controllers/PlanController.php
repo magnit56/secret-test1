@@ -5,25 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Resources\PlanResource;
 use App\Models\Group;
+use App\Services\PlanServiceContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
-    public function store(StorePlanRequest $storePlanRequest, Group $group): string
+    public function store(StorePlanRequest $storePlanRequest, Group $group, PlanServiceContract $planService): string
     {
         try {
-            $lectures = collect($storePlanRequest->validated('lectures'))->unique()->mapWithKeys(function ($lecture_id, $index) {
-                return [$lecture_id => ['sort' => $index]];
-            });
-            return DB::transaction(function () use ($storePlanRequest, $group, $lectures) {
-                $plan = $group->plan()->updateOrCreate(['group_id' => $group->id], $storePlanRequest->safe()->only(['title']));
-                $plan->lectures()->sync($lectures);
-                $group->plan_id = $plan->id;
-                $plan->save();
-                $group->save();
-                return 'success';
-            });
+            $planService->updateOrCreate($storePlanRequest->validated(), $group);
+            return 'success';
         } catch (\Exception) {
             return 'error';
         }

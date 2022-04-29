@@ -15,7 +15,7 @@ class GroupListen extends Model
         return $this->belongsTo(Lecture::class);
     }
 
-    public function group()
+    public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
     }

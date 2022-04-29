@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\ListenedLecture;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource
@@ -13,7 +14,7 @@ class StudentResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
+    public function toArray($request): array|Arrayable
     {
         return [
             'id' => $this->id,

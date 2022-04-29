@@ -7,9 +7,8 @@ use App\Http\Requests\UpdateLectureRequest;
 use App\Http\Resources\LectureCollection;
 use App\Http\Resources\LectureResource;
 use App\Models\Group;
-use App\Models\GroupListen;
 use App\Models\Lecture;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use App\Services\ListenLectureServiceContract;
 
 class LectureController extends Controller
 {
@@ -39,7 +38,7 @@ class LectureController extends Controller
         }
     }
 
-    public function destroy(Lecture $lecture)
+    public function destroy(Lecture $lecture): string
     {
         try {
             $lecture->deleteOrFail();
@@ -49,13 +48,10 @@ class LectureController extends Controller
         }
     }
 
-    public function listen(Lecture $lecture, Group $group): string
+    public function listen(Lecture $lecture, Group $group, ListenLectureServiceContract $listenLectureService): string
     {
         try {
-            $groupListen = new GroupListen();
-            $groupListen->lecture()->associate($lecture);
-            $groupListen->group()->associate($group);
-            $groupListen->saveOrFail();
+            $listenLectureService->group($lecture, $group);
             return 'success';
         } catch (\Throwable $e) {
             return 'error';

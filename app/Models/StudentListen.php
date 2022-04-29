@@ -15,7 +15,7 @@ class StudentListen extends Model
         return $this->belongsTo(Lecture::class);
     }
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }

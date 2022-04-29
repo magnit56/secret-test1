@@ -14,7 +14,7 @@ class LectureFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'topic' => $this->faker->text(5),
