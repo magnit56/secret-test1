@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->foreignId('plan_id')->constrained();
+            $table->foreignId('plan_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

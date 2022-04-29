@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\GroupListen;
+use App\Models\ListenedLecture;
+use App\Observers\GroupListenObserver;
+use App\Observers\ListenedLectureObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        GroupListen::observe(GroupListenObserver::class);
     }
 
     /**

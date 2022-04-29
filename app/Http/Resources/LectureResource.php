@@ -18,6 +18,12 @@ class LectureResource extends JsonResource
             'id' => $this->id,
             'topic' => $this->topic,
             'description' => $this->description,
+            'groups' => $this->groupListens->map(function ($groupListen) {
+                return $groupListen->group->only(['id', 'title']);
+            }),
+            'students' => $this->studentListens->map(function ($studentListen) {
+                return $studentListen->student->only(['id', 'name', 'email']);
+            }),
         ];
     }
 }

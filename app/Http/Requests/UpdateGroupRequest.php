@@ -25,7 +25,6 @@ class UpdateGroupRequest extends FormRequest
     {
         return [
             'title' => 'string|nullable',
-            'plan_id' => 'integer|nullable',
         ];
     }
 }

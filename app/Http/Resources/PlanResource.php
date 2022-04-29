@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\ListenedLecture;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StudentResource extends JsonResource
+class PlanResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +16,10 @@ class StudentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
+            'title' => $this->title,
             'group' => $this->group()->exists() ? $this->group->only(['id', 'title']) : null,
-            'listened lectures' => $this->studentListens->map(function ($studentListen) {
-                return $studentListen->lecture->only(['id', 'topic', 'description']);
+            'lectures' => $this->lectures->map(function ($lecture) {
+                return $lecture->only(['id', 'topic', 'description']);
             }),
         ];
     }

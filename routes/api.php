@@ -32,6 +32,8 @@ Route::prefix('lecture')->group(function () {
     Route::post('/', [\App\Http\Controllers\LectureController::class, 'store'])->name('lecture.store');
     Route::patch('/{lecture}', [\App\Http\Controllers\LectureController::class, 'update'])->name('lecture.update');
     Route::delete('/{lecture}', [\App\Http\Controllers\LectureController::class, 'destroy'])->name('lecture.destroy');
+
+    Route::post('/{lecture}/listen/{group}', [\App\Http\Controllers\LectureController::class, 'listen'])->name('lecture.listen');
 });
 
 Route::prefix('group')->group(function () {
@@ -40,4 +42,7 @@ Route::prefix('group')->group(function () {
     Route::post('/', [\App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
     Route::patch('/{group}', [\App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
     Route::delete('/{group}', [\App\Http\Controllers\GroupController::class, 'destroy'])->name('group.destroy');
+
+    Route::post('/{group}/plan', [\App\Http\Controllers\PlanController::class, 'store'])->name('plan.store');
+    Route::get('/{group}/plan', [\App\Http\Controllers\PlanController::class, 'show'])->name('plan.show');
 });

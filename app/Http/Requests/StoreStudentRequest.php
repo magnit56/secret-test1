@@ -26,6 +26,7 @@ class StoreStudentRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:App\Models\Student,email',
+            'group_id' => 'exists:App\Models\Group,id|nullable',
         ];
     }
 }

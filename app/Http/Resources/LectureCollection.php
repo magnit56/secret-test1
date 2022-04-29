@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class StudentCollection extends ResourceCollection
+class LectureCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,7 +16,7 @@ class StudentCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection->map(function ($item) {
-                return $item->only(['id', 'name', 'email']);
+                return $item->only(['id', 'topic', 'description']);
             }),
         ];
     }

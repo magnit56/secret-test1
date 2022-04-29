@@ -25,7 +25,6 @@ class StoreGroupRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'plan_id' => 'required|integer',
         ];
     }
 }
